@@ -26,12 +26,6 @@ jobs:
       - name: Build frontend
         run: npm run build
 
-      - name: Archive production artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: sso-frontend-build
-          path: dist/
-
   deploy:
     needs: build
     runs-on: ubuntu-latest
