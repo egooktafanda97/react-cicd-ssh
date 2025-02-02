@@ -1,0 +1,160 @@
+/*------------------------------------------------------------------
+[Master Stylesheet]
+Project                        :    Ynex - React Typescript TailwindCss Admin Dashboard Template
+
+Created Date                   :   03/02/2024
+
+Updated Date                   :   19/12/2024
+
+Author & Copyright Ownership   :   Spruko Technologies Private Limited 
+
+Author URL                     :   https://themeforest.net/user/spruko
+
+Support	                       :   https://support.spruko.com/
+
+License Details                :   https://spruko.com/licenses-details
+
+-------------------------------------------------------------------*/
+
+/*--- Start Table of Content ---
+Font-family
+Icons
+Variables
+Authentication
+Dashboard_styles
+Error
+Header
+Landing
+Job_landing
+Horizontal
+Icon_click
+Icon_hover
+Menu_click
+Menu_hover
+Vertical
+Chat
+Pages_styles
+Task
+Calendar
+Datatable
+Plugins
+Bg-img-styles
+Boxed
+Classic-page-styles
+Closed_menu
+Detached_menu
+Double_menu
+Header-scrollable
+Header-styles
+Icon-overlay
+Icontext
+Loader
+Menu-scrollable
+Menu-styles
+Accordion
+Alerts
+Avatars
+Breadcrumb
+Buttons
+Cards
+Carousels
+Components
+Custom
+Dropdown
+Forms
+Modal
+Offcanvas
+Pagination
+Progress
+Tables
+Tailwind
+Tooltip
+Toast
+--- End Table of Content ---*/
+
+// @forward "./tailwind/tailwind";
+@forward "./variables";
+
+/* CUSTOM STYLES */
+@forward "./custom/authentication";
+@forward "./custom/dashboard_styles";
+@forward "./custom/error";
+@forward "./custom/header";
+@forward "./custom/landing";
+@forward "./custom/job_landing.scss";
+/* CUSTOM STYLES */
+
+/* PAGES STYLES */
+@forward "./pages/chat";
+@forward "./pages/pages_styles";
+@forward "./pages/task";
+/* PAGES STYLES */
+
+/* PLUGINS STYLES */
+@forward "./plugins/calendar";
+@forward "./plugins/datatable";
+@forward "./plugins/plugins.scss";
+/* PLUGINS STYLES */
+
+/* SWITCHER STYLES */
+@forward "./switcher/bg-img-styles";
+@forward "./switcher/boxed";
+@forward "./switcher/classic-page-style";
+@forward "./switcher/closed_menu";
+@forward "./switcher/detached_menu";
+@forward "./switcher/double_menu";
+@forward "./switcher/header-scrollable";
+@forward "./switcher/header-styles";
+@forward "./switcher/horizontal";
+@forward "./switcher/icon_click";
+@forward "./switcher/icon_hover";
+@forward "./switcher/icon-overlay";
+@forward "./switcher/icontext";
+@forward "./switcher/loader";
+@forward "./switcher/menu_click";
+@forward "./switcher/menu_hover";
+@forward "./switcher/menu-scrollable";
+@forward "./switcher/menu-styles";
+@forward "./switcher/vertical";
+/* SWITCHER STYLES */
+
+/* TAILWIND STYLES */
+@forward "./tailwind/accordion";
+@forward "./tailwind/alerts";
+@forward "./tailwind/avatars.scss";
+@forward "./tailwind/breadcrumb";
+@forward "./tailwind/buttons";
+@forward "./tailwind/cards";
+@forward "./tailwind/carousels.scss";
+@forward "./tailwind/components";
+@forward "./tailwind/custom";
+@forward "./tailwind/dropdown";
+@forward "./tailwind/forms";
+@forward "./tailwind/modal";
+@forward "./tailwind/offcanvas";
+@forward "./tailwind/pagination";
+@forward "./tailwind/progress";
+@forward "./tailwind/tables";
+@forward "./tailwind/tooltip";
+@forward "./tailwind/toast.scss";
+/* TAILWIND STYLES */
+
+@forward "./global/custom-styles";
+@forward "./global/date-picker";
+@forward "./global/react-datepicker";
+@forward "./global/select2";
+
+/* Start FontFamily Styles */
+/* inter */
+// @import "./tailwind/tailwind";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Montserrat */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
+
+/* End Tailwind Styles Styles */
+
+// @import "./icons";
+
+
+

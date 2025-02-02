@@ -1,0 +1,113 @@
+import React, { useState } from 'react';
+import Spktables from '../../@spk/tables/spk-tables';
+import { Link } from 'react-router-dom';
+
+interface TableColumn {
+  title: string;
+  headerClassname: string;
+}
+
+interface PaginatedTableProps {
+  title: string;
+  data: any[];
+  columns: TableColumn[];
+  rowsPerPage?: number;
+  renderRow: (row: any, index: number) => JSX.Element;
+}
+
+const PaginatedTable: React.FC<PaginatedTableProps> = ({
+  title,
+  data,
+  columns,
+  rowsPerPage = 10,
+  renderRow,
+}) => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const totalPages = Math.ceil(data.length / rowsPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prev) => prev + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => prev - 1);
+    }
+  };
+
+  const paginatedData = data.slice(
+    (currentPage - 1) * rowsPerPage,
+    currentPage * rowsPerPage
+  );
+
+  return (
+    <div className='grid grid-cols-12 gap-x-6'>
+      <div className='xl:col-span-12 col-span-12'>
+        <div className='box'>
+          <div className='box-header justify-between'>
+            <div className='box-title'>{title}</div>
+          </div>
+          <div className='box-body'>
+            <div className='table-responsive'>
+              <Spktables
+                tableClass='table whitespace-nowrap table-bordered min-w-full'
+                header={columns}>
+                {paginatedData.map(renderRow)}
+              </Spktables>
+            </div>
+          </div>
+          <div className='box-footer'>
+            <nav aria-label='Page navigation'>
+              <ul className='ti-pagination ltr:float-right rtl:float-left mb-0'>
+                <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+                  <Link
+                    className='page-link px-3 py-[0.375rem]'
+                    to='#'
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handlePrevPage();
+                    }}>
+                    Previous
+                  </Link>
+                </li>
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <li
+                    key={page}
+                    className={`page-item ${page === currentPage ? 'active' : ''}`}>
+                    <Link
+                      className='page-link px-3 py-[0.375rem]'
+                      to='#'
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setCurrentPage(page);
+                      }}>
+                      {page}
+                    </Link>
+                  </li>
+                ))}
+                <li
+                  className={`page-item ${currentPage === totalPages ? 'disabled' : ''
+                    }`}>
+                  <Link
+                    className='page-link px-3 py-[0.375rem]'
+                    to='#'
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNextPage();
+                    }}>
+                    Next
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PaginatedTable;

@@ -1,0 +1,86 @@
+import React, { useState } from 'react';
+import DataGrid, { Column, RowsChangeData } from 'react-data-grid';
+import 'react-data-grid/lib/styles.css';
+
+// Define the type for rows
+type Row = {
+id: number;
+task: string;
+client: string;
+area: string;
+country: string;
+contact: string;
+assignee: string;
+completion: number;
+};
+
+// Generate sample data
+const rowsData: Row[] = Array.from({ length: 1000 }, (\_, i) => ({
+id: i + 1,
+task: `Task #${i + 1}`,
+client: ["Doe", "Smith", "Johnson", "Brown"][i % 4] + " - Group",
+area: ["Tactics", "Solutions", "Integration", "Research"][i % 4],
+country: ["USA", "Canada", "Germany", "France"][i % 4],
+contact: `contact${i}@example.com`,
+assignee: ["Alice", "Bob", "Charlie", "Diana"][i % 4],
+completion: Math.floor(Math.random() \* 100),
+}));
+
+// Define columns
+const columns: Column<Row>[] = [
+{ key: "id", name: "ID", width: 50 },
+{ key: "task", name: "Task", resizable: true },
+{ key: "client", name: "Client", resizable: true },
+{ key: "area", name: "Area", resizable: true },
+{ key: "country", name: "Country", resizable: true },
+{ key: "contact", name: "Contact", resizable: true },
+{ key: "assignee", name: "Assignee", resizable: true },
+{
+key: "completion",
+name: "Completion",
+resizable: true,
+formatter: ({ row }) => (
+<div style={{ display: "flex", alignItems: "center" }}>
+<div
+style={{
+width: "100px",
+height: "8px",
+marginRight: "8px",
+}}
+>
+<div
+style={{
+width: `${row.completion}%`,
+height: "100%",
+background: row.completion > 50 ? "#4caf50" : "#f44336",
+}}
+></div>
+</div>
+<span>{row.completion}%</span>
+</div>
+),
+},
+];
+
+const MyDataGrid: React.FC = () => {
+const [rows, setRows] = useState<Row[]>(rowsData);
+
+    return (
+        <div style={{ height: "80vh", width: "100%" }}>
+            <DataGrid<any>
+                columns={columns}
+                rows={rows}
+                className="rdg-light"
+                defaultColumnOptions={{
+                    minWidth: 100,
+                    resizable: true,
+                    sortable: true,
+                    draggable: true
+                }}
+            />
+        </div>
+    );
+
+};
+
+export default MyDataGrid;

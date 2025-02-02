@@ -1,0 +1,46 @@
+{
+    "company": {
+        ".": "Company",
+        "create": "Create Company",
+        "edit": "Edit Company",
+        "delete": "Delete Company",
+        "company_name": "Company Name",
+        "update": "Update Company",
+        "add_new_company": "Add New Company"
+    },
+    "service": {
+        ".": "Service",
+        "create": "Create Service",
+        "edit": "Edit Service",
+        "delete": "Delete Service",
+        "service_name": "Service Name",
+        "update": "Update Service",
+        "add_new_service": "Add New Service",
+        "description": "Description",
+        "base_domain": "Base Domain"
+    },
+    "role": {
+        ".": "Role",
+        "create": "Create Role",
+        "edit": "Edit Role",
+        "delete": "Delete Role",
+        "role_name": "Role Name",
+        "update": "Update Role",
+        "add_new_role": "Add New Role"
+    },
+    "search": "Search",
+    "address": "Address",
+    "download": "download",
+    "create": "create",
+    "zip_code": "Zip Code",
+    "telephone": "Telephone",
+    "fax": "Fax",
+    "website": "Website",
+    "save": "Save",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "password_confirm": "Password Confirm",
+    "avatar": "Avatar",
+    "cover": "Cover"
+}
