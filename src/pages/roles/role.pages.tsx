@@ -139,7 +139,7 @@ export default function RolePage() {
               label: {
                 name: "",
               },
-              field: (row: any) => _(
+              field: () => _(
                 <div className='flex justify-end'>
                   <button
                     onClick={() => navigate(`/roles/role-permissions`)}
