@@ -36,12 +36,6 @@ jobs:
         with:
           token: ${{ secrets.GH_TOKEN }}
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: sso-frontend-build
-          path: dist/
-
       - name: Deploy to server
         run: |
           # SSH into the server and deploy
