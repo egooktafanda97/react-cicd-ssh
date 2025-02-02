@@ -47,10 +47,6 @@ jobs:
             # Pull the latest changes from the main branch
             git -c "url.https://x-access-token:${{ secrets.GH_TOKEN }}@github.com.insteadOf=https://github.com" pull origin main --rebase
             
-            # Remove old build and replace with new one
-            rm -rf dist/
-            mv ~/actions-runner/_work/sso-frontend/sso-frontend/dist/ ./dist/
-
             # Restart Docker container
             docker-compose down
             docker-compose up -d
