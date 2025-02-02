@@ -16,4 +16,14 @@ export default defineConfig({
       "@": root,
     } as AliasOptions,
   },
+  preview: {
+    port: 8060,
+    strictPort: true,
+  },
+  server: {
+    port: 8060,
+    strictPort: true,
+    host: true,
+    origin: "http://0.0.0.0:8060",
+  },
 });

@@ -1,0 +1,72 @@
+name: Frontend CI/CD
+
+on:
+  push:
+    paths:
+      - publish/deploy.txt
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: sso-frontend-build
+          path: dist/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: sso-frontend-build
+          path: dist/
+
+      - name: Deploy to server
+        run: |
+          # SSH into the server and deploy
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ego.oktafanda@172.232.226.36 << 'EOF'
+
+            # Navigate to the project directory
+            cd /srv/sso-frontend
+
+            # Pull the latest changes from the main branch
+            git -c "url.https://x-access-token:${{ secrets.GH_TOKEN }}@github.com.insteadOf=https://github.com" pull origin main --rebase
+            
+            # Remove old build and replace with new one
+            rm -rf dist/
+            mv ~/actions-runner/_work/sso-frontend/sso-frontend/dist/ ./dist/
+
+            # Restart Docker container
+            docker-compose down
+            docker-compose up -d
+          EOF
+        env:
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}

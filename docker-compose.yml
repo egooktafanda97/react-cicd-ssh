@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  frontend:
+    container_name: sso-frontend
+    image: react-vite-app
+    build: .
+    ports:
+      - '8060:8060'
+    volumes:
+      - ./dist:/app/dist
+    restart: always
