@@ -4,7 +4,7 @@ import desktoplogo from '../assets/images/brand-logos/desktop-logo.png';
 import desktopdarklogo from '../assets/images/brand-logos/desktop-dark.png';
 import SpkButton from '../../@spk/uielements/spk-button';
 
-interface SignupProps {}
+interface SignupProps { }
 
 const Signup: FC<SignupProps> = () => {
   const [passwordshow1, setpasswordshow1] = useState(false);
@@ -17,7 +17,7 @@ const Signup: FC<SignupProps> = () => {
             <div className='xxl:col-span-4 xl:col-span-4 lg:col-span-4 md:col-span-3 sm:col-span-2'></div>
             <div className='xxl:col-span-4 xl:col-span-4 lg:col-span-4 md:col-span-6 sm:col-span-8 col-span-12'>
               <div className='my-[2.5rem] flex justify-center'>
-                <Link to={`${import.meta.env.BASE_URL}dashboards/crm/`}>
+                <Link to={`${import.meta.env.VITE_META_BASE_PATH}dashboards/crm/`}>
                   <img src={desktoplogo} alt='logo' className='desktop-logo' />
                   <img
                     src={desktopdarklogo}
@@ -80,9 +80,8 @@ const Signup: FC<SignupProps> = () => {
                           customClass='ti-btn !rounded-s-none !mb-0'
                           Id='button-addon2'>
                           <i
-                            className={`${
-                              passwordshow1 ? 'ri-eye-line' : 'ri-eye-off-line'
-                            } align-middle`}></i>
+                            className={`${passwordshow1 ? 'ri-eye-line' : 'ri-eye-off-line'
+                              } align-middle`}></i>
                         </SpkButton>
                       </div>
                     </div>
@@ -107,9 +106,8 @@ const Signup: FC<SignupProps> = () => {
                           onclickfunc={() => setpasswordshow2(!passwordshow2)}
                           Id='button-addon21'>
                           <i
-                            className={`${
-                              passwordshow2 ? 'ri-eye-line' : 'ri-eye-off-line'
-                            } align-middle`}></i>
+                            className={`${passwordshow2 ? 'ri-eye-line' : 'ri-eye-off-line'
+                              } align-middle`}></i>
                         </SpkButton>
                       </div>
                       <div className='mt-4'>
@@ -125,9 +123,8 @@ const Signup: FC<SignupProps> = () => {
                             htmlFor='defaultCheck1'>
                             By creating a account you agree to our{' '}
                             <Link
-                              to={`${
-                                import.meta.env.BASE_URL
-                              }pages/termsconditions`}
+                              to={`${import.meta.env.VITE_META_BASE_PATH
+                                }pages/termsconditions`}
                               className='text-success'>
                               <u>Terms &amp; Conditions</u>
                             </Link>{' '}
@@ -152,7 +149,7 @@ const Signup: FC<SignupProps> = () => {
                     <p className='text-[0.75rem] text-[#8c9097] dark:text-white/50 mt-4'>
                       Already have an account?{' '}
                       <Link
-                        to={`${import.meta.env.BASE_URL}`}
+                        to={`${import.meta.env.VITE_META_BASE_PATH}`}
                         className='text-primary'>
                         Sign In
                       </Link>

@@ -1,20 +1,17 @@
 # Gunakan Node.js 20 sebagai base image
 FROM node:20
-
-# Set working directory di dalam container
 WORKDIR /app
 
-# Install PM2 secara global
-RUN npm install -g pm2
+COPY package.json .
 
-# Salin hanya package.json dan package-lock.json untuk menginstal dependencies
-COPY package.json package-lock.json ./
+RUN npm install
 
-# Install dependencies tanpa devDependencies (karena sudah dibangun di luar Docker)
-RUN npm install --omit=dev
+RUN npm i -g serve
 
-# Salin direktori build hasil dari proses build di luar Docker
-COPY dist ./dist
+COPY . .
 
-# Perintah untuk menjalankan PM2 dan serve build Vite React
-CMD ["pm2-runtime", "serve", "dist", "--spa", "--port", "8060"]
+RUN npm run build
+
+EXPOSE 8060
+
+CMD [ "serve", "-s", "dist", "-p", "8060" ]

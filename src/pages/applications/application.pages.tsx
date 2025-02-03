@@ -24,7 +24,7 @@ export default function ApplicationPages() {
         try {
             const response: any = await ApiRequest.get('/company-service-providers/user-company');
             if (response) {
-                setDataService(response?.data);
+                // setDataService(response?.data);
             }
         } catch (error) {
             console.error('Error:', error);
@@ -42,7 +42,7 @@ export default function ApplicationPages() {
             <Pageheader
                 currentpage='App Service'
                 activepage='App Service'
-                activepage_link={`${import.meta.env.BASE_URL}company`}
+                activepage_link={`${import.meta.env.VITE_META_BASE_PATH}company`}
                 mainpage='App Service'
             />
 

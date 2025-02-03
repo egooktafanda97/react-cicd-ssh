@@ -134,7 +134,7 @@ export default function CompanyCreate(): React.ReactElement {
       <Pageheader
         currentpage='Company'
         activepage='Company'
-        activepage_link={`${import.meta.env.BASE_URL}company`}
+        activepage_link={`${import.meta.env.VITE_META_BASE_PATH}company`}
         mainpage='Create'
       />
 

@@ -102,7 +102,7 @@ export default function CompanyDetail() {
             <Pageheader
                 currentpage=''
                 activepage='Company'
-                activepage_link={`${import.meta.env.BASE_URL}company`}
+                activepage_link={`${import.meta.env.VITE_META_BASE_PATH}company`}
                 mainpage='Create'
             />
             <div className="grid grid-cols-12 gap-x-6">

@@ -27,54 +27,54 @@ export default function Routing() {
     return (
         <Routes>
             <Route
-                path={`${import.meta.env.BASE_URL}/`}
+                path={`${import.meta.env.VITE_META_BASE_PATH}/`}
                 element={<SignIn />}></Route>
             <Route
-                path={`${import.meta.env.BASE_URL}/login`}
+                path={`${import.meta.env.VITE_META_BASE_PATH}/login`}
                 element={<SignIn />}></Route>
             <Route
-                path={`${import.meta.env.BASE_URL}/logout`}
+                path={`${import.meta.env.VITE_META_BASE_PATH}/logout`}
                 element={<SignOut />}></Route>
             <Route
-                path={`${import.meta.env.BASE_URL}`}
+                path={`${import.meta.env.VITE_META_BASE_PATH}`}
                 element={<Authenticationlayout />}>
                 <Route
-                    path={`${import.meta.env.BASE_URL}error/error-401`}
+                    path={`${import.meta.env.VITE_META_BASE_PATH}error/error-401`}
                     element={<Error401 />}
                 />
                 <Route
-                    path={`${import.meta.env.BASE_URL}error/error-404`}
+                    path={`${import.meta.env.VITE_META_BASE_PATH}error/error-404`}
                     element={<Error404 />}
                 />
                 <Route
-                    path={`${import.meta.env.BASE_URL}error/error-500`}
+                    path={`${import.meta.env.VITE_META_BASE_PATH}error/error-500`}
                     element={<Error500 />}
                 />
             </Route>
-            <Route path={`${import.meta.env.BASE_URL}`} element={<App />}>
+            <Route path={`${import.meta.env.VITE_META_BASE_PATH}`} element={<App />}>
                 {/* <Route element={<ProtectedRoute />}> */}
                 <Route
-                    path={`${import.meta.env.BASE_URL}dashboard`}
+                    path={`${import.meta.env.VITE_META_BASE_PATH}dashboard`}
                     element={<DashbaordPage />}
                 />
                 <Route
-                    path={`${import.meta.env.BASE_URL}app-services/*`}
+                    path={`${import.meta.env.VITE_META_BASE_PATH}app-services/*`}
                     element={<ApplicationModel />} />
                 <Route
-                    path={`${import.meta.env.BASE_URL}company/*`}
+                    path={`${import.meta.env.VITE_META_BASE_PATH}company/*`}
                     element={<CompanyModule />}
                 />
 
                 <Route
-                    path={`${import.meta.env.BASE_URL}services/*`}
+                    path={`${import.meta.env.VITE_META_BASE_PATH}services/*`}
                     element={<ServiceModule />}
                 />
                 <Route
-                    path={`${import.meta.env.BASE_URL}roles/*`}
+                    path={`${import.meta.env.VITE_META_BASE_PATH}roles/*`}
                     element={<RolesModule />}
                 />
                 <Route
-                    path={`${import.meta.env.BASE_URL}users/*`}
+                    path={`${import.meta.env.VITE_META_BASE_PATH}users/*`}
                     element={<UsersModule />}
                 />
                 {/* </Route> */}

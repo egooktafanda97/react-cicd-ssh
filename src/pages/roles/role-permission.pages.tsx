@@ -59,7 +59,7 @@ export default function RolePermission() {
             <Pageheader
                 currentpage='Company'
                 activepage='Company'
-                activepage_link={`${import.meta.env.BASE_URL}company`}
+                activepage_link={`${import.meta.env.VITE_META_BASE_PATH}company`}
                 mainpage='Create'
             />
             <div className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4">

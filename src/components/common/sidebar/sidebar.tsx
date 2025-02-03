@@ -29,6 +29,7 @@ const Sidebar: FC<SidebarProps> = ({ local_varaiable, ThemeChanger }: any) => {
   const contextPermissions: any = useContext(PermissionContext);
   // console.log(contextPermissions.hasPermissionName("GENERAL-REGISTER"));
 
+  console.log("contextPermissions", contextPermissions);
 
   function closeMenu() {
     const closeMenudata = (items: any) => {
@@ -777,7 +778,12 @@ const Sidebar: FC<SidebarProps> = ({ local_varaiable, ThemeChanger }: any) => {
               {MenuItems.map((levelone: any, index: any) => (
                 <Fragment key={index}>
                   {
-                    !isEmpty(levelone?.permission) && (contextPermissions.hasPermissionName(levelone?.permission ?? "") || levelone?.permission == "AUTH-ACCESS-PUBLIC" || levelone?.permission == "ALL") && (
+                    !isEmpty(levelone?.permission) &&
+                    (
+                      contextPermissions.hasPermissionName(levelone?.permission ?? "") ||
+                      levelone?.permission == "AUTH-ACCESS-PUBLIC" ||
+                      levelone?.permission == "ALL")
+                    && (
                       <li
                         className={`${levelone.menutitle ? 'slide__category' : ''
                           } ${levelone.type === 'link' ? 'slide' : ''}
