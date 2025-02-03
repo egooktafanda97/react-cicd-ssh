@@ -21,7 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.Fragment>
     <Provider store={store}>
       <RootWrapper>
-        <BrowserRouter>
+        <BrowserRouter basename={`${import.meta.env.BASE_URL}`}>
           {/* <AuthProvider> */}
           {/* <Toaster /> */}
           <React.Suspense fallback={<Loader />}>

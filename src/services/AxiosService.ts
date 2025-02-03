@@ -17,10 +17,14 @@ class AxiosService {
         }
 
         if (config?.token) {
-            this.defaultHeaders['Authorization'] = `Bearer ${config.token}`;
+            this.defaultHeaders['x-access-token'] = `${config.token}`;
         }
+        this.defaultHeaders['Authorization'] = import.meta.env.VITE_SECRET_BEARER_SERVICE;
         if (config?.headers) {
-            this.defaultHeaders = { ...this.defaultHeaders, ...config.headers };
+            this.defaultHeaders = {
+                ...this.defaultHeaders,
+                ...config.headers,
+            };
         }
 
         // Set default headers

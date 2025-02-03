@@ -27,54 +27,54 @@ export default function Routing() {
     return (
         <Routes>
             <Route
-                path={`${import.meta.env.BASE_URL}/`}
+                path={`/`}
                 element={<SignIn />}></Route>
             <Route
-                path={`${import.meta.env.BASE_URL}/login`}
+                path={`/login`}
                 element={<SignIn />}></Route>
             <Route
-                path={`${import.meta.env.BASE_URL}/logout`}
+                path={`/logout`}
                 element={<SignOut />}></Route>
             <Route
-                path={`${import.meta.env.BASE_URL}`}
+                path={``}
                 element={<Authenticationlayout />}>
                 <Route
-                    path={`${import.meta.env.BASE_URL}error/error-401`}
+                    path={`error/error-401`}
                     element={<Error401 />}
                 />
                 <Route
-                    path={`${import.meta.env.BASE_URL}error/error-404`}
+                    path={`error/error-404`}
                     element={<Error404 />}
                 />
                 <Route
-                    path={`${import.meta.env.BASE_URL}error/error-500`}
+                    path={`error/error-500`}
                     element={<Error500 />}
                 />
             </Route>
-            <Route path={`${import.meta.env.BASE_URL}`} element={<App />}>
+            <Route path={`/`} element={<App />}>
                 {/* <Route element={<ProtectedRoute />}> */}
                 <Route
-                    path={`${import.meta.env.BASE_URL}dashboard`}
+                    path={`dashboard`}
                     element={<DashbaordPage />}
                 />
                 <Route
-                    path={`${import.meta.env.BASE_URL}app-services/*`}
+                    path={`app-services/*`}
                     element={<ApplicationModel />} />
                 <Route
-                    path={`${import.meta.env.BASE_URL}company/*`}
+                    path={`company/*`}
                     element={<CompanyModule />}
                 />
 
                 <Route
-                    path={`${import.meta.env.BASE_URL}services/*`}
+                    path={`services/*`}
                     element={<ServiceModule />}
                 />
                 <Route
-                    path={`${import.meta.env.BASE_URL}roles/*`}
+                    path={`roles/*`}
                     element={<RolesModule />}
                 />
                 <Route
-                    path={`${import.meta.env.BASE_URL}users/*`}
+                    path={`users/*`}
                     element={<UsersModule />}
                 />
                 {/* </Route> */}

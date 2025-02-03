@@ -8,6 +8,7 @@ const root = path.resolve(__dirname, "src");
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: "/sso/",
   define: {
     'process.env': {},
   },
@@ -19,11 +20,13 @@ export default defineConfig({
   preview: {
     port: 8060,
     strictPort: true,
+    host: true,
+    allowedHosts: true,
   },
   server: {
     port: 8060,
     strictPort: true,
     host: true,
-    origin: "http://0.0.0.0:8060",
+    allowedHosts: true,
   },
 });
