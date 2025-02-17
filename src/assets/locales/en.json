@@ -28,6 +28,7 @@
         "update": "Update Role",
         "add_new_role": "Add New Role"
     },
+    "name": "Name",
     "search": "Search",
     "address": "Address",
     "download": "download",

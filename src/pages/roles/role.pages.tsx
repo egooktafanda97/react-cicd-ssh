@@ -67,7 +67,7 @@ export default function RolePage() {
 
   const hndelUpdate = async (items: any) => {
     try {
-      const reads = await apiRequest.get(`/role/${items.id}`);
+      const reads = await apiRequest.get(`/roles/${items.id}`);
       if (reads) {
         setDataUpdate(reads?.data);
         const modal = document.getElementById('btn-hs-vertically-centered-modal-update');
@@ -85,7 +85,7 @@ export default function RolePage() {
 
   const hndelDelete = (items: any) => {
     deleteFunction({
-      url: `${Utils.baseApiUrl()}/role/${items.id}`,
+      url: `${Utils.baseApiUrl()}/roles/${items.id}`,
       callback: () => {
         setKeyInstance(new Date().getTime().toString());
         toast.success('delete success', {
@@ -104,7 +104,7 @@ export default function RolePage() {
           display: 'none',
         }}
         id="btn-hs-vertically-centered-modal-update"
-        data-hs-overlay="#hs-vertically-centered-modal-update"
+        data-hs-overlay="#hs-vertically-centered-modal-role-update"
       >
         <i className="ri-edit-line"></i>
       </button>
@@ -139,14 +139,17 @@ export default function RolePage() {
               label: {
                 name: "",
               },
-              field: () => _(
+              field: (row: any) => _(
                 <div className='flex justify-end'>
-                  <button
-                    onClick={() => navigate(`/roles/role-permissions`)}
+                  <a href={`/roles/role-permissions/${row.id}`} className='hover:text-blue-500' >
+                    Permission
+                  </a>
+                  {/* <button
+                    onClick={() => navigate(`/roles/role-permissions/${row.id}`)}
 
                     className="rounded-md flex items-center border border-slate-300 py-2 px-4 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
-                    Set Permission Role
-                  </button>
+
+                  </button> */}
                 </div>
               )
             },

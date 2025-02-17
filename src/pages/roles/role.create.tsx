@@ -18,7 +18,7 @@ const apiRequest = new AxiosService({
     token: Utils.getToken() ?? ''
 });
 
-export default function ServiceCreate({ donePost }: any) {
+export default function RoleCreate({ donePost }: any) {
     const [loading, setLoading] = React.useState(false);
     const [formData, setFormData] = useState<fromData>({
         name: '',
@@ -56,7 +56,7 @@ export default function ServiceCreate({ donePost }: any) {
                 <div className="ti-modal-content">
                     <div className="ti-modal-header">
                         <h6 className="modal-title text-[1rem] font-semibold" id="staticBackdropLabel2">
-                            Service Provider Form
+                            Role Create
                         </h6>
                         <button type="button" id='modalClose' className="hs-dropdown-toggle ti-modal-close-btn" data-hs-overlay="#hs-vertically-centered-modal">
                             <span className="sr-only">Close</span>
@@ -72,7 +72,7 @@ export default function ServiceCreate({ donePost }: any) {
                                 <div className="grid grid-cols-12 sm:gap-12 mb-4">
                                     <div className="xl:col-span-12 col-span-12">
                                         <label htmlFor="job-title" className="form-label">
-                                            {Str.cap(lang.service.service_name ?? 'name')}
+                                            {Str.cap(lang.role.role_name ?? 'name')}
                                             <span className="ml-1 text-danger">*</span>
                                         </label>
                                         <input type="text"
@@ -85,7 +85,7 @@ export default function ServiceCreate({ donePost }: any) {
                                 <div className="grid grid-cols-12 sm:gap-12 mb-4">
                                     <div className="xl:col-span-12 col-span-12">
                                         <label htmlFor="job-title" className="form-label">
-                                            {Str.cap(lang.service.description ?? 'description')}
+                                            {Str.cap('description')}
                                             <span className="ml-1 text-danger">*</span>
                                         </label>
                                         <textarea

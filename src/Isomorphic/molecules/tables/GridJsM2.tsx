@@ -51,7 +51,6 @@ interface GridProps {
     filter?: string;
     TopHeader?: () => JSX.Element;
     keyInstance?: string | null;
-    noHeader?: boolean;
 }
 const Text = () => {
     return {
@@ -89,45 +88,13 @@ export const GridComponent = ({ url, dataset, limit = 10, isAuth = true, QuerySe
 
 const GridJSMemo = React.memo(GridComponent);
 
-export default function GridJS({ url, dataset, limit = 10, isAuth = true, TopHeader = () => <></>, keyInstance = null, noHeader = false }: GridProps) {
+export default function GridJSM2({ url, dataset, limit = 10, isAuth = true, TopHeader = () => <></>, keyInstance = null }: GridProps) {
     const [search, setSearch] = useState('');
     const [querySearch, setQuerySearch] = useState('');
     return (
-        <div id='GridM1' className='w-full h-full'>
+        <div id='GridM2' className='w-full h-full'>
             <div id="grid-wide" className="table-responsive h-full">
-                <div className="box-header">
-                    {!noHeader && (<>
-                        <div className="box-title w-full flex justify-between flex-row items-center ">
-                            <TopHeader />
-                        </div>
-                        <div className='flex w-full justify-between items-center'>
-                            <input type="text"
-                                name="search"
-                                onChange={(e) => setSearch(e.target.value)}
-                                placeholder={Text().search ?? ''}
-                                className="w-[400px] mr-2 form-control focus:!border-primary border focus:!ring-0 focus:!ring-offset-0 disabled:opacity-50 disabled:pointer-events-none" />
-                            <button
-                                onClick={() => {
-                                    setQuerySearch(search)
-                                }}
-                                type="button" className="mr-2 ml-2 ti-btn ti-btn-outline-dark dark:ti-btn-dark label-ti-btn !rounded-full dark:bg-bodybg2">
-                                <i className="ri-search-2-fill text-[1rem] label-ti-btn-icon me-2 !rounded-full"></i>
-                                {Text().searchBtn ?? ''}
-                            </button>
 
-                            <SpkDropdown Icon={true} Customclass=" ms-2" Linktag={false} arialexpand={false} IconClass="ti ti-dots-vertical"
-                                CustomToggleclass="ti-btn-secondary ti-btn-sm">
-                                {/* 
-                            <li><Link className="ti-dropdown-item !py-2 !px-[0.9375rem] !text-[0.8125rem] !font-medium block" to="#">All Invoices</Link></li>
-                            <li><Link className="ti-dropdown-item !py-2 !px-[0.9375rem] !text-[0.8125rem] !font-medium block" to="#">Paid Invoices</Link></li>
-                            <li><Link className="ti-dropdown-item !py-2 !px-[0.9375rem] !text-[0.8125rem] !font-medium block" to="#">Pending Invoices</Link></li>
-                            <li><Link className="ti-dropdown-item !py-2 !px-[0.9375rem] !text-[0.8125rem] !font-medium block" to="#">Overdue Invoices</Link></li> 
-                        */}
-                            </SpkDropdown>
-                        </div>
-                    </>)}
-
-                </div>
                 <GridJSMemo
                     key={keyInstance ?? dataset.map((col: any) => col.label).join('')}
                     url={url}

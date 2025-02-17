@@ -100,6 +100,7 @@ export default function CompanyCreate(): React.ReactElement {
       navigate('/company');
     } catch (error: any) {
       const { data } = error;
+      setLoading(false);
       if (data.errorCode == "VALIDATION_ERROR") {
         data.data.forEach((err: any) => {
           toast.error(err.message, {

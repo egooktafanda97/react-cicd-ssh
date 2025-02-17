@@ -1,5 +1,5 @@
 import React, { lazy } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from '@/contex/ProtectedRoute.tsx';
 import SignIn from '@/pages/auth/signin.tsx';
 import DashbaordPage from '@/pages/dashboard/page.tsx';
@@ -9,6 +9,7 @@ import SignOut from '@/pages/auth/signout';
 import ApplicationModel from '@/pages/applications';
 import RolesModule from '@/pages/roles';
 import UsersModule from '@/pages/users';
+import TaxPages from '@/pages/master-tax/tax.pages';
 const App = lazy(() => import('@/pages/App.tsx'));
 const Error401 = lazy(
     () => import('@/container/error/error-401/error-401.tsx')
@@ -77,6 +78,11 @@ export default function Routing() {
                     path={`${import.meta.env.VITE_META_BASE_PATH}users/*`}
                     element={<UsersModule />}
                 />
+                <Route path={`${import.meta.env.VITE_META_BASE_PATH}/master`} element={(<Outlet />)}>
+                    <Route
+                        path={`${import.meta.env.VITE_META_BASE_PATH}tax/*`}
+                        element={<TaxPages />} />
+                </Route>
                 {/* </Route> */}
             </Route>
         </Routes>

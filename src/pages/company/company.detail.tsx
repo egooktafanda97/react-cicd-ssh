@@ -64,14 +64,18 @@ export default function CompanyDetail() {
         setLoadingState((prev) => ({ ...prev, [id]: action }));
 
         try {
-            if (action === "installing") {
-                await ApiRequest.post("/company-service-providers", {
-                    company_id: companyData?.id,
-                    service_provider_id: id,
-                });
-            } else if (action === "uninstalling") {
-                await ApiRequest.delete(`/company-service-providers/${id}/with-service`);
-            }
+            await ApiRequest.post("/company-service-providers/install", {
+                company_id: companyData?.id,
+                service_provider_id: id,
+            });
+            // if (action === "installing") {
+            //     await ApiRequest.post("/company-service-providers", {
+            //         company_id: companyData?.id,
+            //         service_provider_id: id,
+            //     });
+            // } else if (action === "uninstalling") {
+            //     await ApiRequest.delete(`/company-service-providers/${id}/with-service`);
+            // }
 
             const serviceIndex = serviceData.findIndex((item) => item.id === id);
             if (serviceIndex !== -1) {

@@ -43,7 +43,7 @@ export default function UserCompanyPage() {
 
     const handleDelete = (items: any) => {
         deleteFunction({
-            url: `${Utils.baseApiUrl()}/user/${items.id}`,
+            url: `${Utils.baseApiUrl()}/users/${items.id}`,
             callback: () => {
                 toast.success('User deleted successfully!', {
                     position: 'top-right',
@@ -52,12 +52,16 @@ export default function UserCompanyPage() {
         });
     };
 
+    const handleRoles = (items: any) => {
+        navigate(`/users/roles/${items.id}`);
+    }
+
     return (
         <Fragment>
             <div className="h-100 w-full"></div>
             <div className="main-content flex flex-col h-[calc(100vh-3.5rem)] w-full !p-0">
                 <GridJS
-                    url={`${Utils.baseApiUrl()}/user`}
+                    url={`${Utils.baseApiUrl()}/users/list`}
                     TopHeader={() => (
                         <>
                             <div className="box-title"></div>
@@ -100,6 +104,17 @@ export default function UserCompanyPage() {
                             label: "#",
                             field: (row: any) => _(
                                 <div>
+                                    <SpkButton
+                                        onclickfunc={() => handleRoles(row)}
+                                        Label="button"
+                                        buttontype="button"
+                                        variant="secondary"
+                                        Size="sm"
+                                        title="Roles"
+                                        customClass="ti-btn ti-btn-icon me-2"
+                                    >
+                                        <i className="ri-lock-2-line"></i>
+                                    </SpkButton>
                                     <SpkButton
                                         onclickfunc={() => handleUpdate(row)}
                                         Label="button"

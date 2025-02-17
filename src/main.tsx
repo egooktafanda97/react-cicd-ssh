@@ -23,7 +23,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <RootWrapper>
         <BrowserRouter>
           {/* <AuthProvider> */}
-          {/* <Toaster /> */}
+          <Toaster />
           <React.Suspense fallback={<Loader />}>
             <Routing />
           </React.Suspense>

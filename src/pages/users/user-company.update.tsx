@@ -1,4 +1,4 @@
-import React, { Fragment, useState, ChangeEvent, FormEvent } from 'react';
+import React, { Fragment, useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { FaSave } from 'react-icons/fa';
 import SpkButton from '@/@spk/uielements/spk-button';
 import SpkSpinner from '@/@spk/uielements/spk-spinner';
@@ -8,7 +8,8 @@ import { Str } from '@/utils/Str';
 import toast from 'react-hot-toast';
 import AxiosService from '@/services/AxiosService';
 import { Utils } from '@/utils/Utils';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+
 
 interface FormData {
     name?: string;
@@ -23,72 +24,58 @@ const ApiRequest = new AxiosService({
     token: Utils.getToken() ?? '',
 });
 
-
-export default function UserCompanyCreated() {
-    const [formData, setFormData] = useState<FormData>({
-        name: '',
-        username: '',
-        email: '',
-        password: '',
-        avatar: undefined,
-        cover: undefined,
-    });
+export default function UserCompanyUpdate() {
+    const { id } = useParams<{ id: string }>();
+    const [formData, setFormData] = useState<FormData>({});
     const [passwordShow, setPasswordShow] = useState<boolean>(false);
     const [passwordConfirmShow, setPasswordConfirmShow] = useState<boolean>(false);
     const [passwordConfirm, setPasswordConfirm] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
     const navigate = useNavigate();
-    const validatePasswordMatching = (password: string | any, passwordConfirm: string) => {
-        if (!password || !passwordConfirm) {
-            return { valid: false, message: "Both password fields are required." };
-        }
 
-        if (password !== passwordConfirm) {
-            return { valid: false, message: "Passwords do not match." };
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const response: any = await ApiRequest.get(`/users/${id}`);
+                response.data.name = response.data.name ?? response.data.displayname ?? '';
+                setFormData(response.data);
+            } catch (error) {
+                toast.error("Failed to fetch user data", { position: 'top-right' });
+            }
+        };
+        if (id) {
+            fetchUserData();
         }
-
-        return { valid: true, message: "Passwords match." };
-    };
+    }, [id]);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
-        const validationResult = validatePasswordMatching(formData.password, passwordConfirm);
 
-        if (!validationResult.valid) {
-            toast.error(validationResult.message, {
-                position: 'top-right',
-            });
-            return;
-        }
-        setLoading(true);
         const formDataSubmit = new FormData();
         formDataSubmit.append('name', formData.name ?? '');
         formDataSubmit.append('username', formData.username ?? '');
         formDataSubmit.append('email', formData.email ?? '');
-        formDataSubmit.append('password', formData.password ?? '');
-        formDataSubmit.append('avatar', formData.avatar ?? '');
-        formDataSubmit.append('cover', formData.cover ?? '');
+        if (formData.password) {
+            formDataSubmit.append('password', formData.password);
+        }
+        if (formData.avatar) {
+            formDataSubmit.append('avatar', formData.avatar);
+        }
+        if (formData.cover) {
+            formDataSubmit.append('cover', formData.cover);
+        }
 
         try {
-            const push: any = await ApiRequest.post('/users', formDataSubmit, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                }
+            const push: any = await ApiRequest.put(`/users/${id}`, formDataSubmit, {
+                headers: { 'Content-Type': 'multipart/form-data' }
             });
-            if (push) {
-                setLoading(false);
-                toast.success(push?.message ?? "Success", {
-                    position: 'top-right',
-                });
-                navigate("/users");
-            }
-
+            setLoading(false);
+            toast.success(push?.message ?? "User updated successfully", { position: 'top-right' });
+            navigate("/users");
         } catch (error: any) {
             setLoading(false);
-            toast.error(error?.response?.data?.message ?? "Failed", {
-                position: 'top-right',
-            });
+            toast.error(error?.response?.data?.message ?? "Update failed", { position: 'top-right' });
         }
     };
 
@@ -103,33 +90,26 @@ export default function UserCompanyCreated() {
 
     return (
         <Fragment>
-            <Pageheader
-                currentpage='Users'
-                activepage='Users'
-                activepage_link={`${import.meta.env.VITE_META_BASE_PATH}users`}
-                mainpage='Create'
-            />
-
+            <Pageheader currentpage='Users' activepage='Users' activepage_link={`${import.meta.env.VITE_META_BASE_PATH}users`} mainpage='Update' />
             <div className='grid grid-cols-12 gap-x-6'>
                 <div className='col-span-12'>
                     <form onSubmit={handleSubmit} className='box'>
                         <div className='box-header justify-between'>
-                            <div className='box-title'>{Str.cap('User Created')}</div>
+                            <div className='box-title'>{Str.cap('User Update')}</div>
                         </div>
                         <div className='box-body grid grid-cols-12 gap-6 mb-4'>
-                            {/* name */}
-                            <InputField label={lang.name ?? 'name'} name='name' type='text' onChange={handleInputChange} required />
-                            {/* Username */}
-                            <InputField label={lang.username ?? 'username'} name='username' type='text' onChange={handleInputChange} required />
-                            {/* Email */}
-                            <InputField label={lang.email ?? 'email'} name='email' type='email' onChange={handleInputChange} required />
-                            {/* Password */}
+                            <InputField
+                                value={formData.name}
+
+                                label={lang.name ?? 'name'} name='name' type='text' onChange={handleInputChange} required />
+                            <InputField
+                                value={formData.username}
+                                label={lang.username ?? 'username'} name='username' type='text' onChange={handleInputChange} required />
+                            <InputField
+                                value={formData.email}
+                                label={lang.email ?? 'email'} name='email' type='email' onChange={handleInputChange} required />
                             <PasswordField label={lang.password ?? 'password'} name='password' show={passwordShow} setShow={setPasswordShow} onChange={handleInputChange} />
-                            {/* Confirm Password */}
-                            <PasswordField label={lang.password_confirm ?? 'password confirm'} name='password_confirm' show={passwordConfirmShow} setShow={setPasswordConfirmShow} onChange={(e) => setPasswordConfirm(e.target.value)} />
-                            {/* Avatar Upload */}
                             <FileInputField label={lang.avatar ?? 'avatar'} name='avatar' onChange={(e) => handleFileChange(e, 'avatar')} />
-                            {/* Cover Upload */}
                             <FileInputField label={lang.cover ?? 'cover'} name='cover' onChange={(e) => handleFileChange(e, 'cover')} />
                         </div>
                         <div className='box-footer text-end'>
@@ -154,22 +134,33 @@ export default function UserCompanyCreated() {
     );
 }
 
+
 interface InputFieldProps {
     label: string;
     name: string;
     type: string;
     onChange: (e: ChangeEvent<HTMLInputElement>) => void;
     required?: boolean;
+    value: any;
 }
 
-function InputField({ label, name, type, onChange, required }: InputFieldProps) {
+function InputField({ label, name, type, onChange, required, value }: InputFieldProps) {
     return (
         <div className='xl:col-span-6 col-span-12'>
             <label htmlFor={name} className='form-label'>{Str.cap(label)}<span className='ml-1 text-danger'>*</span></label>
-            <input type={type} name={name} onChange={onChange} required={required} className='form-control focus:border-primary border focus:ring-0 focus:ring-offset-0 disabled:opacity-50 disabled:pointer-events-none' id={name} />
+            <input
+                type={type}
+                name={name}
+                value={value} // Gunakan state sebagai nilai default
+                onChange={onChange}
+                required={required}
+                className='form-control focus:border-primary border focus:ring-0 focus:ring-offset-0 disabled:opacity-50 disabled:pointer-events-none'
+                id={name}
+            />
         </div>
     );
 }
+
 
 interface PasswordFieldProps {
     label: string;

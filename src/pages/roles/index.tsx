@@ -8,7 +8,7 @@ const RolesModule = () => {
   return (
     <Routes>
       <Route path='/' element={<RolePage />} />
-      <Route path='/role-permissions' element={<RolePermission />} />
+      <Route path='/role-permissions/:roleId' element={<RolePermission />} />
     </Routes>
   );
 };
