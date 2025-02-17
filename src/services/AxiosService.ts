@@ -52,8 +52,6 @@ class AxiosService {
         config?: AxiosRequestConfig
     ): Promise<AxiosResponse<T>> {
         try {
-            console.log(config);
-
             return await this.instance.post<T>(url, data, config);
         } catch (error: any) {
             throw error.response || error;

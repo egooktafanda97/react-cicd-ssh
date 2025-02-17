@@ -137,7 +137,7 @@ export default function CompanyUpdate(): React.ReactElement {
             <Pageheader
                 currentpage='Company'
                 activepage='Update Company'
-                activepage_link={`${import.meta.env.BASE_URL}company`}
+                activepage_link={`${import.meta.env.VITE_META_BASE_PATH}company`}
                 mainpage='Update'
             />
 

@@ -22,19 +22,20 @@
     }
   }
 }
+#GridM1 {
+  .gridjs-footer {
+    position: fixed !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    padding-right: 25px !important;
+    padding-left: 25px !important;
+  }
 
-.gridjs-footer {
-  position: fixed !important;
-  bottom: 0 !important;
-  right: 0 !important;
-  padding-right: 25px !important;
-  padding-left: 25px !important;
-}
+  .gridjs-wrapper {
+    height: calc(100vh - 15.6rem) !important;
+  }
 
-.gridjs-wrapper {
-  height: calc(100vh - 15.6rem) !important;
-}
-
-td.gridjs-td {
-  padding: 0.4rem !important;
+  td.gridjs-td {
+    padding: 0.4rem !important;
+  }
 }

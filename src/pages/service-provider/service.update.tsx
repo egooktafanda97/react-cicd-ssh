@@ -131,7 +131,6 @@ export default function ServiceUpdate({ initialData, onClose, donePost }: Servic
                                             name="name"
                                             value={formData.name}
                                             onChange={handleChange}
-                                            required
                                             className="form-control w-full focus:!border-primary border focus:!ring-0 focus:!ring-offset-0 disabled:opacity-50 disabled:pointer-events-none"
                                             id="name"
                                             placeholder="Service Name"
@@ -160,7 +159,6 @@ export default function ServiceUpdate({ initialData, onClose, donePost }: Servic
                                         <input type="file"
                                             name="logo"
                                             onChange={hndelFile}
-                                            required
                                             className="form-control w-full focus:!border-primary border focus:!ring-0 focus:!ring-offset-0 disabled:opacity-50 disabled:pointer-events-none" id="job-title" placeholder="Service Name" />
                                     </div>
                                 </div>

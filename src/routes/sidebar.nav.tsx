@@ -8,6 +8,8 @@ const LanguageIcon = <i className="bx bx-globe side-menu__icon"></i>;
 const MailIcon = <i className="bx bx-envelope side-menu__icon"></i>;
 const SettingsIcon = <i className="bx bx-wrench side-menu__icon"></i>;
 
+
+
 export const MenuItems: any = [
     {
         menutitle: "MAIN",
@@ -16,26 +18,26 @@ export const MenuItems: any = [
 
     {
         icon: DashboardIcon,
-        path: `${import.meta.env.BASE_URL}dashboard`,
+        path: `${import.meta.env.VITE_META_BASE_PATH}dashboard`,
         title: "Dashboards",
         type: "link",
         active: false,
         selected: false,
         permission: "FE-DASHBOARD",
     },
-    ...CompanyNav,
     {
         icon: ApplicationIcon,
-        path: `${import.meta.env.BASE_URL}app-services`,
-        title: "Services",
+        path: `${import.meta.env.VITE_META_BASE_PATH}app-services`,
+        title: "Aplication Service",
         type: "link",
         active: false,
         selected: false,
-        permission: "AUTH-ACCESS-PUBLIC",
+        permission: "APLICATION-SERVICE",
     },
+    ...CompanyNav,
     {
         icon: CompanyIcon,
-        path: `${import.meta.env.BASE_URL}company`,
+        path: `${import.meta.env.VITE_META_BASE_PATH}company`,
         title: "Company",
         type: "link",
         active: false,
@@ -44,7 +46,7 @@ export const MenuItems: any = [
     },
     {
         icon: ServicesIcon,
-        path: `${import.meta.env.BASE_URL}services`,
+        path: `${import.meta.env.VITE_META_BASE_PATH}services`,
         title: "Services",
         type: "link",
         active: false,
@@ -57,7 +59,7 @@ export const MenuItems: any = [
     },
     {
         icon: LanguageIcon,
-        path: `${import.meta.env.BASE_URL}language-master`,
+        path: `${import.meta.env.VITE_META_BASE_PATH}language-master`,
         title: "Language Master",
         type: "link",
         active: false,
@@ -66,7 +68,7 @@ export const MenuItems: any = [
     },
     {
         icon: MailIcon,
-        path: `${import.meta.env.BASE_URL}mail`,
+        path: `${import.meta.env.VITE_META_BASE_PATH}mail`,
         title: "Mail",
         type: "link",
         active: false,
@@ -75,7 +77,7 @@ export const MenuItems: any = [
     },
     {
         icon: SettingsIcon,
-        path: `${import.meta.env.BASE_URL}app-setting`,
+        path: `${import.meta.env.VITE_META_BASE_PATH}app-setting`,
         title: "App Setting",
         type: "link",
         active: false,

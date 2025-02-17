@@ -65,7 +65,7 @@ const SignIn: FC<CoverProps> = () => {
         return;
       }
       if (response?.token === CookieUtils.getCookie('token') || response?.token === localStorage.getItem('token')) {
-        const path = `${import.meta.env.BASE_URL}dashboard`;
+        const path = `${import.meta.env.VITE_META_BASE_PATH}dashboard`;
         // navigate(path);
         window.location.href = path;
         setLoading(false);
@@ -104,7 +104,7 @@ const SignIn: FC<CoverProps> = () => {
                 <div className='mb-4'>
                   <Link
                     aria-label='anchor'
-                    to={`${import.meta.env.BASE_URL}dashboards/crm/`}>
+                    to={`${import.meta.env.VITE_META_BASE_PATH}dashboards/crm/`}>
                     <img src={logo} alt='logo' className='w-40' />
                   </Link>
                 </div>
@@ -153,7 +153,7 @@ const SignIn: FC<CoverProps> = () => {
                       className='form-label text-default block'>
                       Password
                       <Link
-                        to={`$${import.meta.env.BASE_URL
+                        to={`$${import.meta.env.VITE_META_BASE_PATH
                           }authentication/reset-password/reset-cover`}
                         className='ltr:float-right rtl:float-left text-danger'>
                         Forget password?
@@ -203,7 +203,7 @@ const SignIn: FC<CoverProps> = () => {
                   <p className='text-[0.75rem] text-[#8c9097] dark:text-white/50 mt-4'>
                     Don’t have an account?{' '}
                     <Link
-                      to={`$${import.meta.env.BASE_URL
+                      to={`$${import.meta.env.VITE_META_BASE_PATH
                         }authentication/sign-up/signup-cover`}
                       className='text-primary'>
                       Sign Up

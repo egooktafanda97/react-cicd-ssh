@@ -14,4 +14,4 @@ RUN npm run build
 
 EXPOSE 8060
 
-CMD ["yarn", "preview"]
+CMD [ "serve", "-s", "dist", "-p", "8060" ]

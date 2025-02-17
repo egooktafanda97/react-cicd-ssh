@@ -1,5 +1,5 @@
 import React, { lazy } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from '@/contex/ProtectedRoute.tsx';
 import SignIn from '@/pages/auth/signin.tsx';
 import DashbaordPage from '@/pages/dashboard/page.tsx';
@@ -9,6 +9,7 @@ import SignOut from '@/pages/auth/signout';
 import ApplicationModel from '@/pages/applications';
 import RolesModule from '@/pages/roles';
 import UsersModule from '@/pages/users';
+import TaxPages from '@/pages/master-tax/tax.pages';
 const App = lazy(() => import('@/pages/App.tsx'));
 const Error401 = lazy(
     () => import('@/container/error/error-401/error-401.tsx')
@@ -27,56 +28,61 @@ export default function Routing() {
     return (
         <Routes>
             <Route
-                path={`/`}
+                path={`${import.meta.env.VITE_META_BASE_PATH}/`}
                 element={<SignIn />}></Route>
             <Route
-                path={`/login`}
+                path={`${import.meta.env.VITE_META_BASE_PATH}/login`}
                 element={<SignIn />}></Route>
             <Route
-                path={`/logout`}
+                path={`${import.meta.env.VITE_META_BASE_PATH}/logout`}
                 element={<SignOut />}></Route>
             <Route
-                path={``}
+                path={`${import.meta.env.VITE_META_BASE_PATH}`}
                 element={<Authenticationlayout />}>
                 <Route
-                    path={`error/error-401`}
+                    path={`${import.meta.env.VITE_META_BASE_PATH}error/error-401`}
                     element={<Error401 />}
                 />
                 <Route
-                    path={`error/error-404`}
+                    path={`${import.meta.env.VITE_META_BASE_PATH}error/error-404`}
                     element={<Error404 />}
                 />
                 <Route
-                    path={`error/error-500`}
+                    path={`${import.meta.env.VITE_META_BASE_PATH}error/error-500`}
                     element={<Error500 />}
                 />
             </Route>
-            <Route path={`/`} element={<App />}>
+            <Route path={`${import.meta.env.VITE_META_BASE_PATH}`} element={<App />}>
                 {/* <Route element={<ProtectedRoute />}> */}
                 <Route
-                    path={`dashboard`}
+                    path={`${import.meta.env.VITE_META_BASE_PATH}dashboard`}
                     element={<DashbaordPage />}
                 />
                 <Route
-                    path={`app-services/*`}
+                    path={`${import.meta.env.VITE_META_BASE_PATH}app-services/*`}
                     element={<ApplicationModel />} />
                 <Route
-                    path={`company/*`}
+                    path={`${import.meta.env.VITE_META_BASE_PATH}company/*`}
                     element={<CompanyModule />}
                 />
 
                 <Route
-                    path={`services/*`}
+                    path={`${import.meta.env.VITE_META_BASE_PATH}services/*`}
                     element={<ServiceModule />}
                 />
                 <Route
-                    path={`roles/*`}
+                    path={`${import.meta.env.VITE_META_BASE_PATH}roles/*`}
                     element={<RolesModule />}
                 />
                 <Route
-                    path={`users/*`}
+                    path={`${import.meta.env.VITE_META_BASE_PATH}users/*`}
                     element={<UsersModule />}
                 />
+                <Route path={`${import.meta.env.VITE_META_BASE_PATH}/master`} element={(<Outlet />)}>
+                    <Route
+                        path={`${import.meta.env.VITE_META_BASE_PATH}tax/*`}
+                        element={<TaxPages />} />
+                </Route>
                 {/* </Route> */}
             </Route>
         </Routes>

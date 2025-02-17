@@ -26,7 +26,11 @@ export default defineConfig({
   server: {
     port: 8060,
     strictPort: true,
+<<<<<<< HEAD
     host: true,
     allowedHosts: true,
+=======
+    host: true
+>>>>>>> 824c6bfeb5068f1f1044b60185b0684245fdc6b9
   },
 });

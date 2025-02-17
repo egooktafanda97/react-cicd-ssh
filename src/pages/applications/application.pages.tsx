@@ -12,9 +12,6 @@ import { Utils } from '@/utils/Utils';
 const ApiRequest = new AxiosService({
     baseURL: import.meta.env.VITE_BASE_API,
     token: Utils.getToken() ?? '',
-    headers: {
-        'Content-Type': 'multipart/form-data',
-    },
 });
 
 export default function ApplicationPages() {
@@ -22,8 +19,10 @@ export default function ApplicationPages() {
     const [loading, setLoading] = React.useState<boolean>(true);
     const getData = async () => {
         try {
-            const response: any = await ApiRequest.get('/company-service-providers/user-company');
+            const response: any = await ApiRequest.get('/service-providers/load/service');
             if (response) {
+                console.log("<>", response?.data);
+
                 setDataService(response?.data);
             }
         } catch (error) {
@@ -42,7 +41,7 @@ export default function ApplicationPages() {
             <Pageheader
                 currentpage='App Service'
                 activepage='App Service'
-                activepage_link={`${import.meta.env.BASE_URL}company`}
+                activepage_link={`${import.meta.env.VITE_META_BASE_PATH}company`}
                 mainpage='App Service'
             />
 
@@ -50,28 +49,30 @@ export default function ApplicationPages() {
                 <div className='xl:col-span-12 col-span-12'>
                     <div className="grid grid-cols-12 gap-x-6">
                         {dataService.map((item: any) => (
-                            <div className="xxl:col-span-3 xl:col-span-4 md:col-span-6 col-span-12" key={Math.random()}>
-                                <div className="box border border-primary">
-                                    <div className="box-body undefined">
-                                        <div className='flex items-center justify-between'>
-                                            <div className="p-1 bg-primary/10 text-primary">
-                                                <img className=' w-20 h-20' src={`${import.meta.env.VITE_BASE_API}/services/${item?.serviceProvider?.logo ?? ""}`} alt="" />
+                            <Link className="xxl:col-span-3 xl:col-span-4 md:col-span-6 col-span-12" key={Math.random()} to={`${item.serviceProvider.base_domain}?token=${Utils.getAuthToken()}`} target='_blank'>
+                                <div >
+                                    <div className="box border border-primary">
+                                        <div className="box-body undefined">
+                                            <div className='flex items-center justify-between'>
+                                                <div className="p-1 bg-primary/10 text-primary">
+                                                    <img className=' w-20 h-20' src={`${import.meta.env.VITE_BASE_API}/services/${item?.serviceProvider?.logo ?? ""}`} alt="" />
+                                                </div>
                                             </div>
+                                            <p className="mb-0 mt-8 text-[1.25rem] font-semibold leading-none">
+                                                {item?.serviceProvider?.name ?? ""}
+                                            </p>
                                         </div>
-                                        <p className="mb-0 mt-8 text-[1.25rem] font-semibold leading-none">
-                                            {item?.serviceProvider?.name ?? ""}
-                                        </p>
+                                        <div className="box-footer undefined">
+                                            {item?.serviceProvider?.description ?? ""}
+                                        </div>
                                     </div>
-                                    <div className="box-footer undefined">
-                                        {item?.serviceProvider?.description ?? ""}
-                                    </div>
-                                </div>
 
-                            </div>
+                                </div>
+                            </Link>
                         ))}
                     </div>
                 </div>
             </div>
-        </Fragment>
+        </Fragment >
     );
 }
