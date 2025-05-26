@@ -39,7 +39,7 @@ jobs:
       - name: Deploy to server
         run: |
           # SSH into the server and deploy
-          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ego.oktafanda@172.232.226.36 << 'EOF'
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no <username@host> << 'EOF'
 
             # Navigate to the project directory
             cd /srv/sso-frontend
@@ -48,8 +48,7 @@ jobs:
             git -c "url.https://x-access-token:${{ secrets.GH_TOKEN }}@github.com.insteadOf=https://github.com" pull origin main --rebase
             
             # Restart Docker container
-            docker-compose down
-            docker-compose up -d
+            docker-compose restart
           EOF
         env:
           SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
